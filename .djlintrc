@@ -1,0 +1,12 @@
+{
+  "profile": "html",
+  "close_void_tags": true,
+  "format_css": true,
+  "format_js": true,
+  "js": {
+    "indent_size": 5
+  },
+  "css": {
+    "indent_size": 5
+  }
+}
