@@ -1,1 +1,50 @@
-Hello, {{ name }} I am templated t now!
+<!DOCTYPE html>
+<html lang="en" class={% if dark %} "dark" {% else %} "light" {% endif %}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ortin</title>
+        <link href="/static/output.css" rel="stylesheet" />
+        <style>
+             .line-button {
+                  background-color: transparent;
+                  border: none;
+                  height: 0.5rem;
+                  width: 100px;
+                  /* Adjust as needed */
+                  background-color: black;
+                  /* Adjust color as needed */
+                  cursor: pointer;
+                  outline: none;
+             }
+
+             .line-button:hover {
+                  background-color: gray;
+                  /* Optional: Change color on hover */
+
+             }
+        </style>
+        <script>
+             const switchTheme = (checkbox) => {
+                  document.documentElement.className = document.documentElement.classList.contains("light") ? "dark" : "light";
+             }
+        </script>
+    </head>
+    <body class="h-screen grid dark:bg-black">
+        <main class="prose place-self-center dark:prose-invert">
+            <label class"relative cursor-pointer rounded-full">
+                <input type="checkbox"
+                       class="opacity-0 absolute w-0 h-0"
+                       tabindex="0"
+                       onchange="switchTheme(this)" />
+                <span class="border-current border-4 bg-current text-black rounded-l-full h-2 relative w-16 inline-block "></span><span class="border-current border-4 bg-current text-white rounded-r-full h-2 relative bg-white w-16 inline-block"></span>
+            </label>
+            <h3>Hello, I'm Mahie, A student currently studying Computer Science.</h3>
+            <p>
+                I have strong background with Python and recently took to learning Rust to achieve fast and stable code.
+                <b>This site is currently under construction</b> but have a look around.
+                Also for some reason, I'm building this site as severely optimised as possible.
+            </p>
+        </main>
+    </body>
+</html>
