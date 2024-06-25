@@ -23,9 +23,8 @@
             </p>
         </main>
         <script>
-             const switchTheme = (checkbox) => {
-                  document.documentElement.className = document.documentElement.classList.contains("light") ? "dark" : "light";
-             }
+             // will overwrite the <html> classes
+             const switchTheme = (checkbox) => document.documentElement.className = document.documentElement.classList.contains("light") ? "dark" : "light";
         </script>
     </body>
 </html>
