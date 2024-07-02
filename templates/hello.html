@@ -5,8 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Ortin</title>
         <link href="/static/output.css" rel="stylesheet" />
+        <style>
+            .square {
+                height: 2vh;
+                width: 2vh;
+            }
+        </style>
     </head>
     <body class="h-screen grid dark:bg-black">
+        <div id="square-container" class="absolute w-full"></div>
         <main class="prose place-self-center dark:prose-invert">
             <label class"relative cursor-pointer rounded-full">
                 <input type="checkbox"
@@ -22,9 +29,23 @@
                 Also for some reason, I'm building this site as severely optimised as possible.
             </p>
         </main>
-        <script>
-             // will overwrite the <html> classes
-             const switchTheme = (checkbox) => document.documentElement.className = document.documentElement.classList.contains("light") ? "dark" : "light";
+        <script defer>
+            // will overwrite the <html> classes
+            const switchTheme = (checkbox) => document.documentElement.className = document.documentElement.classList.contains("light") ? "dark" : "light";
+
+
+            window.setInterval(x => {
+                if (!document.hasFocus()) return;
+                let container = document.getElementById('square-container');
+                let square = document.createElement("div");
+                square.classList = "square animate-up-square absolute dark:bg-white bg-black"
+                square.style.left = 20 * Math.random() + 80 * Math.floor(2 * Math.random()) + "%";
+                square.style.animationDuration = 6 + Math.random() * 2 + "s";
+                square.onanimationend = (self) => {
+                    self.target.remove()
+                };
+                container.appendChild(square);
+            }, 200);
         </script>
     </body>
 </html>
