@@ -3,15 +3,31 @@ use axum::{routing::get, Router};
 use tower_http::services::ServeDir;
 
 #[derive(Template)]
-#[template(path = "hello.html")]
-struct HelloTemplate {
+#[template(path = "blog.html")]
+struct BlogTemplate {
     dark: bool,
+}
+
+#[derive(Template)]
+#[template(path = "home.html")]
+struct HomeTemplate<'a> {
+    dark: bool,
+    text: &'a str,
 }
 
 #[tokio::main]
 async fn main() {
     let router = Router::new()
-        .route("/", get(|| async { HelloTemplate { dark: false } }))
+        .route(
+            "/",
+            get(|| async {
+                HomeTemplate {
+                    dark: false,
+                    text: "# Hello World",
+                }
+            }),
+        )
+        .route("/blog", get(|| async { BlogTemplate { dark: false } }))
         .nest_service("/static", ServeDir::new("static"))
         .layer(tower_livereload::LiveReloadLayer::new());
 

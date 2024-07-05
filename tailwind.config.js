@@ -9,7 +9,7 @@ module.exports = {
       keyframes: {
         'go-up-square': {
           '0%': { transform: 'translateY(5000%) rotate(0)' },
-          '100%': { transform: 'translateY(0%) rotate(720deg)' },
+          '100%': { transform: 'translateY(-100%) rotate(720deg)' },
         }
       },
       animation: {

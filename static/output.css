@@ -1357,6 +1357,10 @@ select {
   margin-bottom: 0;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -1365,12 +1369,24 @@ select {
   position: relative;
 }
 
+.z-10 {
+  z-index: 10;
+}
+
 .inline-block {
   display: inline-block;
 }
 
+.flex {
+  display: flex;
+}
+
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-0 {
@@ -1393,16 +1409,12 @@ select {
   width: 4rem;
 }
 
-.w-screen {
-  width: 100vw;
+.w-full {
+  width: 100%;
 }
 
 .w-1\/2 {
   width: 50%;
-}
-
-.w-full {
-  width: 100%;
 }
 
 @keyframes go-up-square {
@@ -1411,7 +1423,7 @@ select {
   }
 
   100% {
-    transform: translateY(0%) rotate(720deg);
+    transform: translateY(-100%) rotate(720deg);
   }
 }
 
@@ -1423,8 +1435,24 @@ select {
   cursor: pointer;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.place-self-start {
+  place-self: start;
+}
+
 .place-self-center {
   place-self: center;
+}
+
+.justify-self-center {
+  justify-self: center;
 }
 
 .rounded-full {
@@ -1449,6 +1477,11 @@ select {
   border-color: currentColor;
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
 .bg-current {
   background-color: currentColor;
 }
@@ -1456,11 +1489,6 @@ select {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .text-black {
@@ -1500,6 +1528,16 @@ select {
   --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
 }
 
+@media (min-width: 768px) {
+  .md\:block {
+    display: block;
+  }
+
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+}
+
 .dark\:bg-black:where(.dark, .dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1508,4 +1546,9 @@ select {
 .dark\:bg-white:where(.dark, .dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.dark\:text-white:where(.dark, .dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
