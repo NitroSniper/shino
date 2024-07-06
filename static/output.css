@@ -1369,10 +1369,6 @@ select {
   position: relative;
 }
 
-.z-10 {
-  z-index: 10;
-}
-
 .inline-block {
   display: inline-block;
 }
@@ -1413,10 +1409,6 @@ select {
   width: 100%;
 }
 
-.w-1\/2 {
-  width: 50%;
-}
-
 @keyframes go-up-square {
   0% {
     transform: translateY(5000%) rotate(0);
@@ -1437,14 +1429,6 @@ select {
 
 .justify-around {
   justify-content: space-around;
-}
-
-.gap-4 {
-  gap: 1rem;
-}
-
-.place-self-start {
-  place-self: start;
 }
 
 .place-self-center {
@@ -1546,9 +1530,4 @@ select {
 .dark\:bg-white:where(.dark, .dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.dark\:text-white:where(.dark, .dark *) {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
