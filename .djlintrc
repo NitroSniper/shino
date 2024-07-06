@@ -1,5 +1,5 @@
 {
-  "profile": "html",
+  "profile": "jinja",
   "close_void_tags": true,
   "format_css": true,
   "format_js": true,

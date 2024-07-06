@@ -1743,6 +1743,10 @@ select {
   margin: 1rem;
 }
 
+.block {
+  display: block;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -1771,6 +1775,14 @@ select {
   height: 100vh;
 }
 
+.h-\[1vh\] {
+  height: 1vh;
+}
+
+.h-\[2vh\] {
+  height: 2vh;
+}
+
 .w-0 {
   width: 0px;
 }
@@ -1785,6 +1797,14 @@ select {
 
 .w-1\/2 {
   width: 50%;
+}
+
+.w-\[1vh\] {
+  width: 1vh;
+}
+
+.w-\[2vh\] {
+  width: 2vh;
 }
 
 @keyframes go-up-square {

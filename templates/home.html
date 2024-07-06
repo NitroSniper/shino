@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" class={% if dark %} "dark" {% else %} "light" {% endif %}>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Ortin</title>
-        <link href="/static/output.css" rel="stylesheet" />
-        <style>
-            .square {
-                height: 2vh;
-                width: 2vh;
-            }
-
-            canvas {
-                image-rendering: pixelated;
-            }
-        </style>
-    </head>
-    <body class="h-screen grid dark:bg-black">
+{% extends "base.html" %}
+{% block head %}<title>Ortin - Home</title>{% endblock %}
+{% block body %}
+    <main class="h-screen grid dark:bg-black">
         <div id="square-container" class="fixed w-full"></div>
-        <main class="prose place-self-center dark:prose-invert p-8 md:w-1/2">
+        <article class="prose place-self-center dark:prose-invert p-8 md:w-1/2">
             <label class"relative cursor-pointer rounded-full">
                 <input type="checkbox"
                        class="opacity-0 absolute w-0 h-0"
@@ -42,16 +27,17 @@
                     <h3>Placeholder</h3>
                 </a>
             </nav>
-        </main>
+        </div>
         <script defer>
             const isLight = () => document.documentElement.classList.contains("light");
             // will overwrite the <html> classes
-            const switchTheme = (checkbox) => document.documentElement.className = isLight() ? "dark" : "light";
+            const switchTheme = (checkbox) => document.documentElement.className = localStorage.theme = isLight() ? "dark" : "light";
+            const isMobile = () => Math.min(window.screen.width, window.screen.height) < 768;
             window.setInterval(x => {
-                if ( /* !document.hasFocus() || */ Math.min(window.screen.width, window.screen.height) < 768) return;
+                if (!document.hasFocus() || isMobile()) return;
                 let container = document.getElementById('square-container');
                 let square = document.createElement("div");
-                square.classList = "square animate-up-square absolute dark:bg-white bg-black"
+                square.classList = "h-[2vh] w-[2vh] animate-up-square absolute dark:bg-white bg-black"
                 square.style.left = 20 * Math.random() + 80 * Math.floor(2 * Math.random()) + "%";
                 square.style.animationDuration = 6 + Math.random() * 2 + "s";
                 square.onanimationend = (self) => {
@@ -60,5 +46,5 @@
                 container.appendChild(square);
             }, 200);
         </script>
-    </body>
-</html>
+    </main>
+{% endblock %}
