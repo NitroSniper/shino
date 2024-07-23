@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class={% if dark %} "dark" {% else %} "light" {% endif %}>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="/static/output.css" rel="stylesheet" />
         <script>
             // set dark theme
-            document.documentElement.className = localStorage.theme
+            document.documentElement.className = ("theme" in localStorage) ? localStorage.theme : window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
         </script>
         {% block head %}{% endblock %}
     </head>
-    <body>
+    <body class="dark:bg-black">
         {% block body %}{% endblock %}
     </body>
 </html>
