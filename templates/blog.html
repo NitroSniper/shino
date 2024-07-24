@@ -1,32 +1,9 @@
 {% extends "base.html" %}
-{% block head %}
-    <title>Ortin - Blog</title>
-    <style>
-        #screen {
-            width: 80vw;
-            aspect-ratio: 10 /16;
-        }
-
-        #image {
-            background-image: url("https://images.unsplash.com/photo-1552820728-8b83bb6b773f");
-            width: 100%;
-            height: 100%;
-            background-size: contain;
-            background-position: center;
-        }
-    </style>
-{% endblock %}
+{% block head %}<title>Ortin - Pi</title>{% endblock %}
 {% block body %}
-    <main>
-        <article class="prose dark:prose-invert p-8 h-64">
-            <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f"
-                 class="rounded-xl relative"
-                 loading="lazy" />
-            <h3>CTF</h3>
-        </article>
-        <div id="screen" class="relative">
-            <div id="image"></div>
-            <div id="overlay"></div>
-        </div>
+    <main class="h-screen grid">
+        <article class="prose place-self-center dark:prose-invert p-8 md:w-2/3">
+            {{ content|safe }}
+        </article
     </main>
 {% endblock %}

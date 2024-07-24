@@ -32,6 +32,7 @@
         devShells.default = mkShell rec {
           buildInputs = [
             (rust-bin.nightly.latest.default.override { extensions = [ "rust-analyzer" ]; })
+            bacon
             tailwindcss
             hey
             watchexec

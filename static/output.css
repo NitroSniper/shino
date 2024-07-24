@@ -1536,6 +1536,10 @@ select {
   .md\:w-1\/2 {
     width: 50%;
   }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
 }
 
 .dark\:bg-black:where(.dark, .dark *) {

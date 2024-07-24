@@ -1,11 +1,12 @@
 use askama_axum::Template;
 use axum::{routing::get, Router};
+use tokio::fs;
 use tower_http::services::ServeDir;
 
 #[derive(Template)]
 #[template(path = "blog.html")]
 struct BlogTemplate {
-    dark: bool,
+    content: String,
 }
 
 #[derive(Template)]
@@ -27,7 +28,18 @@ async fn main() {
                 }
             }),
         )
-        .route("/blog", get(|| async { BlogTemplate { dark: false } }))
+        .route(
+            "/blog",
+            get(|| async {
+                BlogTemplate {
+                    content: {
+                        let foo =
+                            markdown::to_html(&fs::read_to_string("src/pi.md").await.unwrap());
+                        foo
+                    },
+                }
+            }),
+        )
         .nest_service("/static", ServeDir::new("static"))
         .layer(tower_livereload::LiveReloadLayer::new());
 
