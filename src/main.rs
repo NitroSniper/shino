@@ -32,11 +32,11 @@ async fn main() {
             "/blog",
             get(|| async {
                 BlogTemplate {
-                    content: {
-                        let foo =
-                            markdown::to_html(&fs::read_to_string("src/pi.md").await.unwrap());
-                        foo
-                    },
+                    content: markdown::to_html(
+                        &fs::read_to_string("src/pi.md")
+                            .await
+                            .expect("to be a markdown file"),
+                    ),
                 }
             }),
         )
