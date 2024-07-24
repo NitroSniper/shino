@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.5 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -1393,10 +1393,6 @@ select {
   height: 0.5rem;
 }
 
-.h-64 {
-  height: 16rem;
-}
-
 .h-\[2vh\] {
   height: 2vh;
 }
@@ -1453,10 +1449,6 @@ select {
 
 .rounded-full {
   border-radius: 9999px;
-}
-
-.rounded-xl {
-  border-radius: 0.75rem;
 }
 
 .rounded-l-full {

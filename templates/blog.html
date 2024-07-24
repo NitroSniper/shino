@@ -1,9 +1,18 @@
 {% extends "base.html" %}
-{% block head %}<title>Ortin - Pi</title>{% endblock %}
+{% block head %}
+    <title>Ortin - Pi</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/kimber.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+{% endblock %}
 {% block body %}
     <main class="h-screen grid">
         <article class="prose place-self-center dark:prose-invert p-8 md:w-2/3">
             {{ content|safe }}
         </article
     </main>
+    <script>
+        hljs.highlightAll();
+    </script>
 {% endblock %}
