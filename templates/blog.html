@@ -8,9 +8,7 @@
 {% endblock %}
 {% block body %}
     <main class="h-screen grid">
-        <article class="prose place-self-center dark:prose-invert p-8 md:w-2/3">
-            {{ content|safe }}
-        </article
+        <article class="prose place-self-center dark:prose-invert p-8">{{ content|safe }}</article>
     </main>
     <script>
         hljs.highlightAll();

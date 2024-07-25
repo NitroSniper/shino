@@ -1,5 +1,6 @@
 use askama_axum::Template;
 use axum::{routing::get, Router};
+use markdown::{Constructs, Options, ParseOptions};
 use tokio::fs;
 use tower_http::services::ServeDir;
 
@@ -32,11 +33,22 @@ async fn main() {
             "/blog",
             get(|| async {
                 BlogTemplate {
-                    content: markdown::to_html(
+                    content: markdown::to_html_with_options(
                         &fs::read_to_string("src/pi.md")
                             .await
                             .expect("to be a markdown file"),
-                    ),
+                        &Options {
+                            parse: ParseOptions {
+                                constructs: Constructs {
+                                    code_indented: false,
+                                    ..Constructs::default()
+                                },
+                                ..ParseOptions::default()
+                            },
+                            ..Options::default()
+                        },
+                    )
+                    .expect("idk"),
                 }
             }),
         )
