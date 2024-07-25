@@ -12,23 +12,12 @@ struct BlogTemplate {
 
 #[derive(Template)]
 #[template(path = "home.html")]
-struct HomeTemplate<'a> {
-    dark: bool,
-    text: &'a str,
-}
+struct HomeTemplate {}
 
 #[tokio::main]
 async fn main() {
     let router = Router::new()
-        .route(
-            "/",
-            get(|| async {
-                HomeTemplate {
-                    dark: false,
-                    text: "# Hello World",
-                }
-            }),
-        )
+        .route("/", get(|| async { HomeTemplate {} }))
         .route(
             "/blog",
             get(|| async {
