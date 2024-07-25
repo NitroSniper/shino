@@ -23,7 +23,7 @@ async fn main() {
             get(|| async {
                 BlogTemplate {
                     content: markdown::to_html_with_options(
-                        &fs::read_to_string("src/pi.md")
+                        &fs::read_to_string("blogs/HostingLocally/pi.md")
                             .await
                             .expect("to be a markdown file"),
                         &Options {
