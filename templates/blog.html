@@ -6,10 +6,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/nix.min.js"></script>
 {% endblock %}
 {% block body %}
-    <main class="h-screen grid">
-        <article class="prose place-self-center dark:prose-invert p-8">{{ content|safe }}</article>
+    <main class="h-screen grid w-full">
+        <article class="prose place-self-center dark:prose-invert p-8 sm:min-w-[70vw]">{{ content|safe }}</article>
     </main>
     <script>
         hljs.highlightAll();
