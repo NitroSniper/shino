@@ -1,55 +1,65 @@
-# in flake.nix
 {
-
-  description = "Nitro's Personal Website";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    # rust toolchain
+    # rust dev toolchain
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      rust-overlay,
-    }:
 
-    flake-utils.lib.eachDefaultSystem (
+  outputs =
+    { ... }@inputs:
+    inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        overlays = [ (import rust-overlay) ];
-        pkgs = import nixpkgs { inherit system overlays; };
+        overlays = [ (import inputs.rust-overlay) ];
+        pkgs = import inputs.nixpkgs { inherit system overlays; };
 
-        # Needed at runtime
-        buildInputs = with pkgs; [ rust-bin.nightly.latest.default ];
+        bin = pkgs.rustPlatform.buildRustPackage {
+          name = "ortin";
+          cargoLock.lockFile = ./Cargo.lock;
+          src = pkgs.lib.cleanSource ./.;
+        };
 
-        # Needed at compile
-        nativeBuildInputs = with pkgs; [
-          (rust-bin.nightly.latest.default.override { extensions = [ "rust-analyzer" ]; })
-          bacon
-          tailwindcss
-          hey
-          watchexec
-          djlint
-        ];
+        docker = pkgs.dockerTools.buildImage {
+          name = "ortin";
+          tag = "latest";
+          copyToRoot = [ bin ];
+          config = {
+            Cmd = [ "${bin}/bin/ortin" ];
+          };
+        };
       in
+      # Needed at compile
       with pkgs;
       {
-
-        # Nix develop Shell program
-        devShells.default = mkShell { inherit buildInputs nativeBuildInputs; };
-
-        packages.app.default = {
-          buildInputs = [ rust-bin.nightly.latest.default ];
+        packages = {
+          # new package: 👇
+          inherit bin docker;
+          default = bin;
+        };
+        devShells.default = mkShell {
+          buildInputs = [
+            (rust-bin.stable.latest.default.override {
+              extensions = [
+                "rust-src"
+                "rustfmt"
+                "rust-analyzer"
+              ];
+            })
+            bacon
+            tailwindcss
+            hey
+            watchexec
+            djlint
+          ];
+        };
+        env = {
+          # Required by rust-analyzer
+          RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";
         };
       }
     );
