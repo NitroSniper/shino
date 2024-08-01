@@ -8,6 +8,11 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    crane = {
+      url = "github:ipetkov/crane";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -15,23 +20,24 @@
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        overlays = [ (import inputs.rust-overlay) ];
-        pkgs = import inputs.nixpkgs { inherit system overlays; };
-
-        # Binary name of cargo project
         name = "ortin";
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [ (import inputs.rust-overlay) ];
+        };
 
-        bin = (
-          pkgs.rustPlatform.buildRustPackage {
-            inherit name;
-            cargoLock.lockFile = ./Cargo.lock;
-            src = pkgs.lib.cleanSource ./.;
-            postInstall = ''
-              mkdir app/
-              mv resources/ $out/
-            '';
-          }
+        # this is how we can tell crane to use our toolchain!
+        craneLib = (inputs.crane.mkLib pkgs).overrideToolchain (
+          p: p.rust-bin.nightly.latest.default.override { }
         );
+
+        bin = craneLib.buildPackage {
+          src = pkgs.lib.cleanSource ./.;
+          strictDeps = false;
+          postInstall = ''
+            mv resources/ $out/
+          '';
+        };
 
         docker = pkgs.dockerTools.buildImage {
           inherit name;
@@ -45,21 +51,17 @@
           };
         };
       in
-      with pkgs;
       {
         packages = {
           inherit bin docker;
           default = bin;
         };
-        devShells.default = mkShell {
-          buildInputs = [
-            (rust-bin.stable.latest.default.override {
-              extensions = [
-                "rust-src"
-                "rustfmt"
-                "rust-analyzer"
-              ];
-            })
+        devShells.default = craneLib.devShell {
+
+          inputsFrom = [ bin ];
+
+          packages = with pkgs; [
+            rust-analyzer
             bacon
             tailwindcss
             hey
@@ -68,10 +70,7 @@
             # dive 
           ];
         };
-        env = {
-          # Required by rust-analyzer
-          RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";
-        };
+
       }
     );
 }
