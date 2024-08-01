@@ -32,7 +32,7 @@
             src = pkgs.lib.cleanSource ./.;
             postInstall = ''
               mkdir app/
-              mv static/ $out/
+              mv resources/ $out/
             '';
           }
         );

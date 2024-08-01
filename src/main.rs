@@ -23,7 +23,7 @@ async fn main() {
             get(|| async {
                 BlogTemplate {
                     content: markdown::to_html_with_options(
-                        &fs::read_to_string("blogs/HostingLocally/pi.md")
+                        &fs::read_to_string("resources/blogs/HostingLocally/pi.md")
                             .await
                             .expect("to be a markdown file"),
                         &Options {
@@ -41,7 +41,7 @@ async fn main() {
                 }
             }),
         )
-        .nest_service("/static", ServeDir::new("static"))
+        .nest_service("/static", ServeDir::new("resources/static"))
         .layer(tower_livereload::LiveReloadLayer::new());
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
