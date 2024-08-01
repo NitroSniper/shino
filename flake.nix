@@ -1,7 +1,3 @@
-#You are trying to move static folder to the docker build. you found a cool article online doing it.
-# Basically you have to ovveride the rust toolcahin build to include special stuff
-# GOod luck brother
-
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -15,7 +11,7 @@
   };
 
   outputs =
-    { self, ... }@inputs:
+    { ... }@inputs:
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
