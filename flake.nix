@@ -1,3 +1,7 @@
+#You are trying to move static folder to the docker build. you found a cool article online doing it.
+# Basically you have to ovveride the rust toolcahin build to include special stuff
+# GOod luck brother
+
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -11,33 +15,43 @@
   };
 
   outputs =
-    { ... }@inputs:
+    { self, ... }@inputs:
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
         overlays = [ (import inputs.rust-overlay) ];
         pkgs = import inputs.nixpkgs { inherit system overlays; };
 
-        bin = pkgs.rustPlatform.buildRustPackage {
-          name = "ortin";
-          cargoLock.lockFile = ./Cargo.lock;
-          src = pkgs.lib.cleanSource ./.;
-        };
+        # Binary name of cargo project
+        name = "ortin";
+
+        bin = (
+          pkgs.rustPlatform.buildRustPackage {
+            inherit name;
+            cargoLock.lockFile = ./Cargo.lock;
+            src = pkgs.lib.cleanSource ./.;
+            postInstall = ''
+              mkdir app/
+              mv static/ $out/
+            '';
+          }
+        );
 
         docker = pkgs.dockerTools.buildImage {
-          name = "ortin";
+          inherit name;
           tag = "latest";
+
           copyToRoot = [ bin ];
+
           config = {
-            Cmd = [ "${bin}/bin/ortin" ];
+            Cmd = [ "/bin/${name}" ];
+            WorkingDir = "/";
           };
         };
       in
-      # Needed at compile
       with pkgs;
       {
         packages = {
-          # new package: 👇
           inherit bin docker;
           default = bin;
         };
@@ -55,6 +69,7 @@
             hey
             watchexec
             djlint
+            # dive 
           ];
         };
         env = {
