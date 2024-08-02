@@ -21,6 +21,7 @@
       system:
       let
         name = "ortin";
+
         pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [ (import inputs.rust-overlay) ];
