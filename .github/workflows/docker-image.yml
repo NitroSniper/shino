@@ -24,6 +24,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Tag Image
-        run: docker tag ortin:latest nitrosniper/ortin:latest
+        run: docker tag shino:latest nitrosniper/shino:latest
       - name: Push Image onto Docker Hub
-        run: docker push nitrosniper/ortin:latest
+        run: docker push nitrosniper/shino:latest

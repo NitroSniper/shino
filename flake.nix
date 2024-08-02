@@ -20,7 +20,7 @@
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        name = "ortin";
+        name = "shino";
 
         pkgs = import inputs.nixpkgs {
           inherit system;
