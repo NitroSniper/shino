@@ -20,9 +20,9 @@
             node2nix
             yarn
             nodePackages."@astrojs/language-server"
-            nodePackages.typescript
-            nodePackages.typescript-language-server
-            nodePackages.prettier_d_slim
+            typescript
+            typescript-language-server
+            biome
           ];
         };
       }
