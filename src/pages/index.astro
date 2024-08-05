@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import { Counter } from '../components/Counter.jsx';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { Counter } from "../components/Counter.jsx";
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<Counter client:load />
-	Hello Everyone
+		Hello Everyone
 	</main>
 </Layout>
 
@@ -47,7 +47,10 @@ import { Counter } from '../components/Counter.jsx';
 	.instructions {
 		margin-bottom: 2rem;
 		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		background: linear-gradient(
+			rgba(var(--accent-dark), 66%),
+			rgba(var(--accent-dark), 33%)
+		);
 		padding: 1.5rem;
 		border-radius: 8px;
 	}
