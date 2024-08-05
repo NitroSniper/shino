@@ -15,13 +15,16 @@
       {
         devShells.default = pkgs.mkShell {
 
-          buildInputs = with pkgs; [
+          packages = with pkgs; [
             nodejs
             node2nix
             yarn
+            nodePackages."@astrojs/language-server"
+            nodePackages.typescript
+            nodePackages.typescript-language-server
+            nodePackages.prettier_d_slim
           ];
         };
-
       }
     );
 }
