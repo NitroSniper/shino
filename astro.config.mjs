@@ -6,5 +6,10 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
     integrations: [solidJs(), tailwind()],
-    site: "https://ortin.dev",
+    output: "server",
+    adapter: cloudflare({
+        platformProxy: {
+            enabled: true,
+        },
+    }),
 });

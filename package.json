@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@astrojs/check": "^0.9.1",
+        "@astrojs/cloudflare": "^11.0.4",
         "@astrojs/solid-js": "^4.4.0",
         "@astrojs/tailwind": "^5.1.0",
         "@tailwindcss/forms": "^0.5.7",
