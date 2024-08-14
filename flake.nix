@@ -23,6 +23,7 @@
             typescript
             typescript-language-server
             biome
+            static-web-server
           ];
         };
       }

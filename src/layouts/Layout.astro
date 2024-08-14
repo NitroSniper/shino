@@ -1,6 +1,6 @@
 ---
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -16,7 +16,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
-	</body>
+    <body class="dark:bg-black">
+	    <slot />
+    </body>
 </html>

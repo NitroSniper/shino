@@ -1,28 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import { Counter } from "../components/Counter.jsx";
+import ToggleTheme from "../components/ToggleTheme";
 ---
 
+
+
 <Layout title="Welcome to Astro.">
-    <main class="h-screen grid">
+    <main class="h-screen grid" >
         <div id="square-container" class="fixed w-full"></div>
-        <article class="prose place-self-center p-8 md:w-1/2">
+        <article class="prose place-self-center dark:prose-invert p-8 md:w-1/2">
+        <ToggleTheme client:load />
             <h3>Hello, I'm Mahie, A student currently studying Computer Science.</h3>
             <p>
                 I have strong background with Python and recently took to learning Rust to achieve fast and stable code.
                 <b>This site is currently under construction</b> but have a look around.
             </p>
-            <nav class="justify-self-center flex justify-around">
-                <a href="/">
-                    <h3>Home</h3>
-                </a>
-                <a href="/blog">
-                    <h3>Blog</h3>
-                </a>
-                <a>
-                    <h3>Placeholder</h3>
-                </a>
-            </nav>
+        </article>
     </main>
 </Layout>
