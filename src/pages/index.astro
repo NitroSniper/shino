@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ToggleTheme from "../components/ToggleTheme";
+import Background from "../components/Background.astro";
 ---
 
 
 
 <Layout title="Welcome to Astro.">
+    <Background />
     <main class="h-screen grid" >
         <div id="square-container" class="fixed w-full"></div>
         <article class="prose place-self-center dark:prose-invert p-8 md:w-1/2">
@@ -17,4 +19,5 @@ import ToggleTheme from "../components/ToggleTheme";
             </p>
         </article>
     </main>
+    
 </Layout>
